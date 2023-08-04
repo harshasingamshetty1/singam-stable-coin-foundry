@@ -13,8 +13,13 @@ contract DeployDSC is Script {
     function run() external {
         HelperConfig helperConfig = new HelperConfig(); // This comes with our mocks!
 
-        (address wethUsdPriceFeed, address wbtcUsdPriceFeed, address weth, address wbtc, uint256 deployerKey) =
-            helperConfig.activeNetworkConfig();
+        (
+            address wethUsdPriceFeed,
+            address wbtcUsdPriceFeed,
+            address weth,
+            address wbtc,
+            uint256 deployerKey
+        ) = helperConfig.activeNetworkConfig();
         tokenAddresses = [weth, wbtc];
         priceFeedAddresses = [wethUsdPriceFeed, wbtcUsdPriceFeed];
 
@@ -29,4 +34,5 @@ contract DeployDSC is Script {
         dsc.transferOwnership(address(dscEngine));
         vm.stopBroadcast();
         return (dsc, dscEngine, helperConfig);
+    }
 }
